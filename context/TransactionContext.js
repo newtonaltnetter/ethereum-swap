@@ -1,4 +1,4 @@
-  import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { contractABI, contractAddress } from '../lib/constants'
 import { ethers } from 'ethers'
 import { client } from '../lib/sanityClient'
@@ -33,9 +33,6 @@ export const TransactionProvider = ({ children }) => {
     amount: '',
   })
 
-  /**
-   * Trigger loading modal
-   */
   useEffect(() => {
     if (isLoading) {
       router.push(`/?loading=${currentAccount}`)
@@ -44,9 +41,7 @@ export const TransactionProvider = ({ children }) => {
     }
   }, [isLoading])
 
-  /**
-   * Create user profile in Sanity
-   */
+  
   useEffect(() => {
     if (!currentAccount) return
     ;(async () => {
@@ -65,11 +60,7 @@ export const TransactionProvider = ({ children }) => {
     setFormData(prevState => ({ ...prevState, [name]: e.target.value }))
   }
 
-  /**
-   * Checks if MetaMask is installed and an account is connected
-   * @param {*} metamask Injected MetaMask code from the browser
-   * @returns
-   */
+  
   const checkIfWalletIsConnected = async (metamask = eth) => {
     try {
       if (!metamask) return alert('Please install metamask ')
@@ -85,10 +76,7 @@ export const TransactionProvider = ({ children }) => {
     }
   }
 
-  /**
-   * Prompts user to connect their MetaMask wallet
-   * @param {*} metamask Injected MetaMask code from the browser
-   */
+  
   const connectWallet = async (metamask = eth) => {
     try {
       if (!metamask) return alert('Please install metamask ')
@@ -102,14 +90,7 @@ export const TransactionProvider = ({ children }) => {
     }
   }
 
-  /**
-   * Saves transaction to Sanity DB
-   * @param {string} txHash Transaction hash
-   * @param {number} amount Amount of ETH that was sent
-   * @param {string} fromAddress Sender address
-   * @param {string} toAddress Recipient address
-   * @returns null
-   */
+  
   const saveTransaction = async (
     txHash,
     amount,
@@ -143,11 +124,7 @@ export const TransactionProvider = ({ children }) => {
     return
   }
 
-  /**
-   * Executes a transaction
-   * @param {*} metamask Injected MetaMask code from the browser
-   * @param {string} currentAccount Current user's address
-   */
+  
   const sendTransaction = async (
     metamask = eth,
     connectedAccount = currentAccount,
